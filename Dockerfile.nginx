@@ -1,0 +1,12 @@
+FROM ubuntu
+
+RUN apt-get update && apt-get install -y \
+    nginx \
+    openssl
+
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY generate_ssl_cert.sh /usr/local/bin/generate_ssl_cert.sh
+
+RUN chmod +x /usr/local/bin/generate_ssl_cert.sh 				#uruchomi skrypt, do generowania certyfikatów SSL
+
+CMD ["nginx", "-g", "daemon off;"]
